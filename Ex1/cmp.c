@@ -9,56 +9,52 @@
 int compareFile(FILE * fPtr1, FILE * fPtr2, int * line, int * col);
 
 
-int main()
+int main(int argc,char* argv[])
 {
     /* File pointer to hold reference of input file */
     FILE * fPtr1; 
     FILE * fPtr2;
-    char path1[100];
-    char path2[100];
 
     int diff;
     int line, col;
 
 
-    /* Input path of files to compare */
-    printf("Enter path of first file: ");
-    scanf("%s", path1);
-    printf("Enter path of second file: ");
-    scanf("%s", path2);
-
-
-    /*  Open all files to compare */
-    fPtr1 = fopen(path1, "r");
-    fPtr2 = fopen(path2, "r");
-
-    /* fopen() return NULL if unable to open file in given mode. */
-    if (fPtr1 == NULL || fPtr2 == NULL)
+    if(argc == 3)
     {
+        /*  Open all files to compare */
+        fPtr1 = fopen(argv[1], "r");
+        fPtr2 = fopen(argv[2], "r");
+
+        /* fopen() return NULL if unable to open file in given mode. */
+        if (fPtr1 == NULL || fPtr2 == NULL)
+        {
         /* Unable to open file hence exit */
-        printf("\nUnable to open file.\n");
-        printf("Please check whether file exists and you have read privilege.\n");
-        exit(EXIT_FAILURE);
-    }
+           printf("Usage : cmp <file1> <file2>");
+        }
 
 
-    /* Call function to compare file */
-    diff = compareFile(fPtr1, fPtr2, &line, &col);
+        /* Call function to compare file */
+         diff = compareFile(fPtr1, fPtr2, &line, &col);
 
-    if (diff == 0)
-    {
-        printf("\nIdentical.");
-    }
-    else 
-    {
-        printf("\nNot identical.\n");
+         if (diff == 0)
+         {
+             printf("Identical\n");
+         }
+         else 
+         {
+        printf("Not identical\n");
         
+            }
+
+
+         /* Finally close files to release resources */
+        fclose(fPtr1);
+        fclose(fPtr2);
     }
-
-
-    /* Finally close files to release resources */
-    fclose(fPtr1);
-    fclose(fPtr2);
+    else {
+        printf("Usage : cmp <file1> <file2>");
+    }
+    
 
     return 0;
 }
