@@ -51,8 +51,9 @@ int main(int argc,char* argv[])
         fclose(fPtr1);
         fclose(fPtr2);
     }
-    else {
-        printf("Usage : cmp <file1> <file2>");
+    else
+    {
+        printf("Usage : cmp <file1> <file2>\n");
     }
     
 
