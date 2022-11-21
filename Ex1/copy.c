@@ -2,71 +2,146 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <stdbool.h>
 
-void Copy(char *src_path, char *dest_path, bool is_link , bool option)
+bool IsLink(char *argv[],int index);
+void DeepCopy(char *src_path,char *dest_path);
+void Copy(char *argv[],char *src_path, char *dest_path, bool is_link , bool option);
+
+void Copy(char *argv[],char *src_path, char *dest_path, bool is_link , bool option)
 {
     if(is_link)
     {
         int bufSize = 256;
         char *buf = malloc(bufSize * sizeof(char));
-        int linkSize = readlink(argv[1], buf, bufSize);
+        char *link = src_path;
+
+        
+        int linkSize = readlink(link, buf, bufSize);
 
         while (linkSize + 1 == bufSize)
          {
             free(buf);
             bufSize *= 2;
             buf = malloc(bufSize * sizeof(char));
-            linkSize = readlink(argv[2], buf, bufSize);
+            linkSize = readlink(link, buf, bufSize);
          }
             
         buf[linkSize] = '\0';
-        if(option)
-        [
-             if (symlink(buf, argv[3]) != 0) {
+        if(option == true)
+        {
+            printf("here");
+             if (symlink(buf, src_path) != 0)
+             {
                     perror("symlink() error");
-                    unlink(argv[3]);
-                }
-        ]
+                    unlink(src_path);
+             }
+                printf("hllo");
+             printf("\nfile is copied.\n");
+
+        }
         else
         {
-
+            DeepCopy(buf,dest_path);
         }
     }
     else
     {
-
+        DeepCopy(src_path,dest_path);
     }
 }
 
-bool IsLink(char *agrv[])
+void DeepCopy(char *src_path,char *dest_path)
 {
-    starct stat path;
-    lstat(argv[1],path)
-    if(S_ISLNK(path.st_mode)) return true;
-    else return false;
+    FILE *src_file;
+    FILE *dest_file;
+
+    src_file = fopen(src_path,"r");
+    dest_file = fopen(dest_path,"w");
+    
+
+    if(src_file == NULL || dest_file == NULL)
+    {
+        printf("Usage : copy <file1> <file2>\n");
+    }
+    else
+    {
+         char ch = fgetc(src_file);
+         while (ch != EOF)
+         {
+       
+            fputc(ch,dest_file);
+
+        
+            ch = fgetc(src_file);
+        }
+
+
+    printf("file is copied.\n");
+
+
+   
+    fclose(src_file);
+    fclose(dest_file);
+    }
+
 }
+
+bool IsLink(char *argv[],int index)
+{
+    struct stat path;
+    lstat(argv[index],&path);
+
+    \
+    if(S_ISLNK(path.st_mode))
+    {
+        return true;
+    } 
+    else 
+    {
+        return false;
+    }
+}
+
+
+
+
+
+
 int main(int argc,char* argv[])
 {
-    bool is_link = IsLInk(agrv);
+    
+    if(argc < 3 || argc > 4)
+    {
+        printf("Usage : copy <file1> <file2>\n");
+        return 0;
+    }
+    
+    bool is_link;
+    
     if(argc == 3)
     {
-       Copy(argv[1],argv[2],is_link,false);
+       is_link = IsLink(argv,1);
+       Copy(argv,argv[1],argv[2],is_link,false);
     }
     else if(argc == 4)
     {
-        char option = getopt(argc, argv, “:if:lrx”);
+        is_link = IsLink(argv,2);
+        int option = getopt(argc, argv, ":if:lrx");
+        
         if(option == 'l' || option == 'L')
         {
-          Copy(argv[2],argv[3],is_link,true);
+            printf("hello");
+          Copy(argv,argv[2],argv[3],is_link,true);
         }
         else
         {
-            printf("Usage : copy <file1> <file2>");
+            printf("Usage : copy <file1> <file2>\n");
         }
     }
     else
     {
-        printf("Usage : copy <file1> <file2>");
+        printf("Usage : copy <file1> <file2>\n");
     }
 
 
