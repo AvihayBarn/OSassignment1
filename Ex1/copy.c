@@ -30,13 +30,13 @@ void Copy(char *argv[],char *src_path, char *dest_path, bool is_link , bool opti
         buf[linkSize] = '\0';
         if(option == true)
         {
-            printf("here");
+            
              if (symlink(buf, src_path) != 0)
              {
                     perror("symlink() error");
                     unlink(src_path);
              }
-                printf("hllo");
+        
              printf("\nfile is copied.\n");
 
         }
@@ -131,7 +131,6 @@ int main(int argc,char* argv[])
         
         if(option == 'l' || option == 'L')
         {
-            printf("hello");
           Copy(argv,argv[2],argv[3],is_link,true);
         }
         else
