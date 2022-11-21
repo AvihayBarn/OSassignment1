@@ -1,18 +1,24 @@
 #include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
 #include "codec.h"
 
-void codec1(char *option , char *src_text , char *dest_text , int length)
+
+void codec1(char *src_text , char *dest_text , int length)
 {
 
-    if(option == "encode")
-    {
+    char ch;
+    for(int i = 0; i < length; i++)
+     {
+            ch = src_text[i];
+            if(isalpha(ch))
+            {
+                ch = isupper(ch) ? toupper(ch) : tolower(ch);
+            }
+            dest_text[i] = ch;
+     }
 
-    }
-
-    else if(option == "decode")
-    {
-        
-    }
-
-
+     printf("\n%s\n",dest_text);
+   
 }

@@ -1,18 +1,16 @@
 #include <stdio.h>
 #include "codec.h"
+#include <string.h>
 
-void codec2(char *option , char *src_text , char *dest_text , int length)
+void codec2(char *src_text , char *dest_text , int length)
 {
 
-    if(option == "encode")
+    for(int i=0 ; i < length ; i++)
     {
-
+        dest_text[i] = (char) -src_text[i];
     }
 
-    else if(option == "decode")
-    {
-        
-    }
+    printf("\n%s\n",dest_text);
 
 
 }
