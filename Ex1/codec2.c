@@ -10,7 +10,7 @@ void codec2(char *src_text , char *dest_text , int length)
         dest_text[i] = (char) -src_text[i];
     }
 
-    printf("\n%s\n",dest_text);
+    printf("%s\n",dest_text);
 
 
 }

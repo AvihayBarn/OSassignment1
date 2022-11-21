@@ -8,17 +8,19 @@
 void codec1(char *src_text , char *dest_text , int length)
 {
 
-    char ch;
+    int ch = 0;
     for(int i = 0; i < length; i++)
      {
             ch = src_text[i];
-            if(isalpha(ch))
+            
+            if(isalpha(ch) !=0)
             {
-                ch = isupper(ch) ? toupper(ch) : tolower(ch);
+                ch = isupper(ch) > 0 ? tolower(ch) : toupper(ch);
+                
             }
             dest_text[i] = ch;
      }
 
-     printf("\n%s\n",dest_text);
+     printf("%s\n",dest_text);
    
 }
