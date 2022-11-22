@@ -56,11 +56,12 @@ lalaLALA2345
 
 the encode with codec2:
 aviavi@aviavi-VirtualBox:~/Desktop/os/Ex1$ ./encode codec2 LALAlala2345
-lalaLALA2345
+������������
 
 the decode with codec2:
-aviavi@aviavi-VirtualBox:~/Desktop/os/Ex1$ ./decode codec2 LALAlala2345
-lalaLALA2345
+aviavi@aviavi-VirtualBox:~/Desktop/os/Ex1$ ./decode codec2  LALAlala2345
+������������
+
 
 
 we use the flowing website to help with parts in ouer code.
