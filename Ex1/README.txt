@@ -65,4 +65,4 @@ lalaLALA2345
 
 we use the flowing website to help with parts in ouer code.
 cmp = https://codeforwin.org/2018/02/c-program-compare-two-files.html
-copy = 
+
